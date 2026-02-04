@@ -41,6 +41,14 @@ app.get('/api/persons/:id', (request, response) => {
         response.status(404).send('Not Found the Person')
     }
 })
+app.get('/info', (request, response) => {
+    const currentDate = new Date()
+    response.send(`
+        <p>Phonebook has info for ${persons.length} people</p>
+        <p>${currentDate}</p>
+        `)
+})
+
 app.delete('/api/persons/:id', (request, response) => {
     const id = request.params.id
     persons = persons.filter(person => person.id !== id)
