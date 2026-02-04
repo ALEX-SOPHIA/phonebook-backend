@@ -38,7 +38,7 @@ app.get('/api/persons/:id', (request, response) => {
     if (person) {
         response.json(person)
     } else {
-        response.status(404).send('Not Found the Person')
+        response.status(404).json({error: 'Person not found'})
     }
 })
 app.get('/info', (request, response) => {
@@ -48,7 +48,6 @@ app.get('/info', (request, response) => {
         <p>${currentDate}</p>
         `)
 })
-
 app.delete('/api/persons/:id', (request, response) => {
     const id = request.params.id
     persons = persons.filter(person => person.id !== id)
