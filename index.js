@@ -64,16 +64,27 @@ app.post('/api/persons', (request, response) => {
     
     if(!body.name) {
         return response.status(400).json({
-            error: 'name missing'
+            error: 'name is missing'
         })
     }
+    if(!body.number) {
+        return response.status(400).json({
+            error: 'number is missing'
+        })
+    }
+    if (persons.some(p => p.name === body.name)) {
+        return response.status(400).json({
+            error: 'name must be unique'
+        })
+    } 
 
     const person = {
         id: generateId(10000),
         name: body.name,
         number: body.number,
     }
-
+    console.log("The added person is", person)
+    
     persons = persons.concat(person)
     response.json(person)
 
