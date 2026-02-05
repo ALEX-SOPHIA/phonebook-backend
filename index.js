@@ -2,7 +2,14 @@ const express = require('express')
 const morgan = require('morgan')
 const app = express()
 
-app.use(morgan('tiny'))
+morgan.token('body',(req) => {
+    if(req.method === 'POST') {
+        return JSON.stringify(req.body)
+    }
+    return ''
+})
+
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body '))
 
 app.use(express.json())
 
@@ -63,8 +70,6 @@ const generateId =  (max) => {
 
 app.post('/api/persons', (request, response) => {
     const body = request.body
-    console.log("body is ", body)
-    
     if(!body.name) {
         return response.status(400).json({
             error: 'name is missing'
@@ -80,17 +85,13 @@ app.post('/api/persons', (request, response) => {
             error: 'name must be unique'
         })
     } 
-
     const person = {
         id: generateId(10000),
         name: body.name,
         number: body.number,
     }
-    console.log("The added person is", person)
-    
     persons = persons.concat(person)
     response.json(person)
-
 })
 
 const PORT = 3002
