@@ -24,6 +24,7 @@
   "homepage": "https://github.com/ALEX-SOPHIA/phonebook-backend#readme",
   "dependencies": {
     "express": "^5.2.1",
+    "mongoose": "^9.2.0",
     "morgan": "^1.10.1",
     "nodemon": "^3.1.11"
   }
