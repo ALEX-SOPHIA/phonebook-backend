@@ -47,6 +47,7 @@ app.get('/info', (request, response, next) => {
         <p>${currentDate}</p>
         `)
         })
+        
         .catch(error => next(error))
     
 })
