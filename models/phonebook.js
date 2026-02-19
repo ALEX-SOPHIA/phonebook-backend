@@ -21,8 +21,20 @@ const personSchema = new mongoose.Schema({
     },
     number: {
         type: String,
-        minLength: 1,
-        required: true
+        minLength: [8,'The phone number is too short! It must be at least 8 characters.'],
+        required: [true, 'Phone number is required.'],
+        validate: {
+            validator: function(v) {
+                // ^ starts with
+                // /.../ regular expression (Regex)
+                // \d{2,3} has 2 or 3 digits
+                // - has a hyphen
+                // \d+ has one or more digits
+                // $ ends immediately after
+                return /^\d{2,3}-\d+$/.test(v);
+            },
+            message: props => `${props.value} is not a valid phone number!` 
+        }
     }
 })
 
