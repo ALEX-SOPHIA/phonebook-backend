@@ -8,7 +8,8 @@
     "start": "node index.js",
     "dev": "node --watch index.js ",
     "build:ui": "rm -rf dist && echo 'Old dist deleted' && cd ../fullstackopen/part2/phonebook && npm run build && cp -r dist ../../../phonebook-backend && echo 'New dist copied ...' ",
-    "deploy:full": "npm run build:ui && git add . && git status && git commit -m uibuild && git push"
+    "lint": "eslint ."
+    
   },
   "repository": {
     "type": "git",
@@ -28,5 +29,11 @@
     "mongoose": "^9.2.0",
     "morgan": "^1.10.1",
     "nodemon": "^3.1.11"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@stylistic/eslint-plugin": "^5.9.0",
+    "eslint": "^10.0.0",
+    "globals": "^17.3.0"
   }
 }
